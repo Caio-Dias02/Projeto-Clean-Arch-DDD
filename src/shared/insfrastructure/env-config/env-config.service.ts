@@ -6,10 +6,10 @@ import { ConfigService } from '@nestjs/config';
 export class EnvConfigService implements EnvConfigInterface {
   constructor(private readonly configService: ConfigService) {}
   getAppPort(): number {
-    return Number(this.configService.get<number>('app.port')) || 3000
+    return Number(this.configService.get<number>('PORT')) || 3000
   }
 
   getNodeEnv(): string {
-    return this.configService.get<string>('app.nodeEnv') || 'development'
+    return this.configService.get<string>('NODE_ENV') || 'development'
   }
 }
