@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class EnvConfigService implements EnvConfigInterface {
   constructor(private readonly configService: ConfigService) {}
+  
   getAppPort(): number {
     return Number(this.configService.get<number>('PORT')) || 3000
   }
