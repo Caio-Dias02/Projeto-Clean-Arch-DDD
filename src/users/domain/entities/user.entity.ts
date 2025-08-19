@@ -57,4 +57,6 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.updatedAt
   }
 
+  
+
 }

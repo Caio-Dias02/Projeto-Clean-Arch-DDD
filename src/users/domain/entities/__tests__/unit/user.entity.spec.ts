@@ -2,17 +2,16 @@ import { UserEntity, UserProps } from "../../../entities/user.entity"
 import { UserDataBuilder } from "../../../testing/helpers/user-data-builder"
 
 describe('UserEntity', () => {
-    let props: UserProps 
+    let props: UserProps
     let sut: UserEntity
-    
+
     beforeEach(() => {
-        props = UserDataBuilder({})     
+        props = UserDataBuilder({})
 
         sut = new UserEntity(props)
     })
 
     it('should be able to create a user', () => {
-       
         expect(sut).toBeDefined()
         expect(sut.props.name).toBe(props.name)
         expect(sut.props.email).toBe(props.email)
@@ -23,6 +22,12 @@ describe('UserEntity', () => {
         expect(sut.props.name).toBeDefined()
         expect(sut.props.name).toEqual(props.name)
         expect(typeof sut.props.name).toBe('string')
+    })
+
+    it('Setter of name field', () =>{
+        sut['name'] = 'other name'
+        expect(sut.props.name).toBe('other name')
+        expect(sut.props.updatedAt).toBeInstanceOf(Date)
     })
 
     it('Getter of email field', () =>{
@@ -37,6 +42,13 @@ describe('UserEntity', () => {
         expect(typeof sut.props.password).toBe('string')
     })
 
+    it('Setter of password field', () =>{
+        sut['password'] = 'other password'
+        expect(sut.props.password).toBe('other password')
+        expect(sut.props.password).toEqual(props.password)
+        expect(sut.props.updatedAt).toBeInstanceOf(Date)
+    })
+
     it('Getter of createdAt field', () =>{
         expect(sut.props.createdAt).toBeDefined()
         expect(sut.props.createdAt).toBeInstanceOf(Date)
@@ -45,6 +57,18 @@ describe('UserEntity', () => {
     it('Getter of updatedAt field', () =>{
         expect(sut.props.updatedAt).toBeDefined()
         expect(sut.props.updatedAt).toBeInstanceOf(Date)
+    })
+
+    it('should be able to update a user', () =>{
+      sut.update('other name')
+      expect(sut.props.name).toBe('other name')
+      expect(sut.props.updatedAt).toBeInstanceOf(Date)
+    })
+
+    it('should be able to update a user password', () =>{
+      sut.updatePassword('other password')
+      expect(sut.props.password).toBe('other password')
+      expect(sut.props.updatedAt).toBeInstanceOf(Date)
     })
 
 })
