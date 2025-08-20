@@ -23,28 +23,28 @@ class CreateUserDto {
 // Exemplo 3: Uso prático
 function exemploUso() {
   const validator = new UserValidator()
-  
+
   // Caso 1: Dados válidos
   const dadosValidos = new CreateUserDto()
   dadosValidos.name = "João Silva"
   dadosValidos.email = "joao@email.com"
   dadosValidos.password = "123456"
-  
+
   const resultadoValido = validator.validate(dadosValidos)
   console.log("Resultado válido:", resultadoValido) // true
   console.log("Dados validados:", validator.validatedData) // { name: "João Silva", email: "joao@email.com", password: "123456" }
   console.log("Erros:", validator.errors) // null
-  
+
   // Caso 2: Dados inválidos
   const dadosInvalidos = new CreateUserDto()
   dadosInvalidos.name = "" // Inválido: IsNotEmpty falha
   dadosInvalidos.email = "email-invalido" // Inválido: IsEmail falha
   dadosInvalidos.password = "123" // Inválido: MinLength falha
-  
+
   const resultadoInvalido = validator.validate(dadosInvalidos)
   console.log("Resultado inválido:", resultadoInvalido) // false
   console.log("Dados validados:", validator.validatedData) // null
-  console.log("Erros:", validator.errors) 
+  console.log("Erros:", validator.errors)
   // {
   //   name: ["name should not be empty"],
   //   email: ["email must be an email"],
